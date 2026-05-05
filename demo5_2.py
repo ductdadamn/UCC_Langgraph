@@ -1,7 +1,8 @@
 # query only
 import os
 from dotenv import load_dotenv
-from langchain_ollama import ChatOllama
+#from langchain_ollama import ChatOllama
+from langchain_groq import ChatGroq
 from langchain_core.tools import tool
 from langchain_core.messages import HumanMessage
 import chromadb
@@ -102,7 +103,8 @@ def retrieve_from_pdf(query: str, n_results: int = 4) -> str:
 
 tools = [retrieve_from_pdf]
 
-llm = ChatOllama(model="qwen2.5:7b", temperature=0)
+#llm = ChatOllama(model="qwen2.5:7b", temperature=0)
+llm = ChatGroq(model="qwen3-32b", temperature=0)
 llm_with_tools = llm.bind_tools(tools)
 
 SYSTEM_PROMPT = """Bạn là trợ lý AI có quyền truy cập cơ sở dữ liệu PDF về Luật Dân số Việt Nam.
